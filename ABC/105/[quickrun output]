@@ -1,0 +1,14 @@
+/var/folders/lm/9xffzp7n7ys9ftvx5hfhcwxc0000gn/T/vTf0ATC/176.cpp:85:2: warning: 'auto' type specifier is a C++11 extension [-Wc++11-extensions]
+        each(i,p) res += i.se*(i.se-1)/2;
+        ^
+/var/folders/lm/9xffzp7n7ys9ftvx5hfhcwxc0000gn/T/vTf0ATC/176.cpp:21:25: note: expanded from macro 'each'
+#define each(itr,v) for(auto &(itr):(v))
+                        ^
+/var/folders/lm/9xffzp7n7ys9ftvx5hfhcwxc0000gn/T/vTf0ATC/176.cpp:85:2: warning: range-based for loop is a C++11 extension [-Wc++11-extensions]
+/var/folders/lm/9xffzp7n7ys9ftvx5hfhcwxc0000gn/T/vTf0ATC/176.cpp:21:36: note: expanded from macro 'each'
+#define each(itr,v) for(auto &(itr):(v))
+                                   ^
+2 warnings generated.
+25
+
+*** time: 0.909538 ***
