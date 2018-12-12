@@ -10,16 +10,18 @@
 #include <vector>
 #include <complex>
 #include <string.h>
+#include <numeric>
 using namespace std;
 
-//#define int long long
+#define int long long
 #define reps(i,s,n) for(int (i)=(s);(i)<(n);++(i))
 #define rep(i,n) reps(i,0,n)
 #define rept(i,n) rep(i,(n)+1)
 #define repst(i,s,n) reps(i,s,(n)+1)
 #define reprt(i,n,t) for(int (i)=(n);(i)>=(t);--(i))
 #define repr(i,n) reprt(i,n,0)
-#define each(itr,v) for(auto &(itr):(v))
+#define each(i,v) for(auto &(i):(v))
+#define eachr(i,v) for(auto &(i)=(v).rbegin();(i)!=(v).rend();(i)++)
 #define all(c) (c).begin(),(c).end()
 #define rall(c) (c).rbegin(),(c).rend()
 #define pb push_back
@@ -59,7 +61,7 @@ const double eps = 1e-10;
 
 ll mop(ll a,ll b,ll m=mod) {ll r=1;a%=m;for(;b;b>>=1){if(b&1)r=r*a%m;a=a*a%m;}return r;}
 ll gcd(ll a,ll b) {return b?gcd(b,a%b):a;}
-ll lcm(ll a,ll b) {return a*b/gcd(a,b);}
+ll lcm(ll a,ll b) {return a/gcd(a,b)*b;}
 bool ool(int x,int y,int h,int w) {return((x<0)||(h<=x)||(y<0)||(w<=y));}
 bool deq(double a,double b) {return abs(a-b)<eps;}
 
@@ -72,15 +74,31 @@ struct oreno_initializer {
 
 
 
-int n, a[100100], x, y;
+int n, root, a[100100], x, y;
 vector<int> e[100100];
+bool ng;
+
+int rec(int v, int p) {
+	if (e[v].size()==1 && e[v][0]==p) return a[v];
+	int sum = 0, mx = 0;
+	each(i,e[v]) if (i!=p) {
+		int t = rec(i,v);
+		sum += t, chmax(mx, t);
+	}
+	int in = sum - a[v], out = a[v]*2 - sum;
+	if (in<0 || min(sum-mx, sum/2)<in) ng = 1;
+	return out;
+}
 
 signed main() {
 	cin >> n;
 	rep(i,n) cin >> a[i];
+	if (n==2) return cout << (a[0]==a[1] ? "YES" : "NO") << endl, 0;
 	rep(i,n-1) {
 		cin >> x >> y;
 		x--, y--;
 		e[x].push_back(y), e[y].push_back(x);
 	}
+	rep(i,n) if (e[i].size()>=2) root = i;
+	cout << (rec(root,-1) || ng ? "NO" : "YES") << endl;
 }
