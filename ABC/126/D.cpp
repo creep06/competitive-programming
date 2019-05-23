@@ -75,13 +75,21 @@ struct oreno_initializer {
 
 
 
-int n, a[100100], l[100100], r[100100], res;
+int n, d[100100], x, y, z;
+vector<pair<int,int> > e[100100];
+
+void rec(int v, int p, int s) {
+    d[v] = s;
+    each(i,e[v]) if (i.first!=p) rec(i.first, v, s+i.second);
+}
 
 signed main() {
     cin >> n;
-    reps(i,1,n+1) cin >> a[i];
-    reps(i,1,n+1) l[i] = gcd(l[i-1], a[i]);
-    repr(i,n) r[i] = gcd(r[i+1], a[i]);
-    reps(i,1,n+1) chmax(res, gcd(l[i-1], r[i+1]));
-    cout << res << endl;
+    rep(i,n-1) {
+        cin >> x >> y >> z;
+        x--, y--;
+        e[x].push_back({y,z}), e[y].push_back({x,z});
+    }
+    rec(0,-1,0);
+    rep(i,n) cout << d[i]%2 << endl;
 }

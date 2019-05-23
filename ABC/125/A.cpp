@@ -13,7 +13,7 @@
 #include <numeric>
 using namespace std;
 
-#define int long long
+//#define int long long
 #define reps(i,s,n) for(int (i)=(s);(i)<(n);++(i))
 #define rep(i,n) reps(i,0,n)
 #define rept(i,n) rep(i,(n)+1)
@@ -75,13 +75,9 @@ struct oreno_initializer {
 
 
 
-int n, a[100100], l[100100], r[100100], res;
+int a, b, t;
 
 signed main() {
-    cin >> n;
-    reps(i,1,n+1) cin >> a[i];
-    reps(i,1,n+1) l[i] = gcd(l[i-1], a[i]);
-    repr(i,n) r[i] = gcd(r[i+1], a[i]);
-    reps(i,1,n+1) chmax(res, gcd(l[i-1], r[i+1]));
-    cout << res << endl;
+    cin >> a >> b >> t;
+    cout << t/a * b << endl;
 }
