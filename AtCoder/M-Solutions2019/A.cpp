@@ -75,11 +75,9 @@ struct oreno_initializer {
 
 
 
-string s;
+int n;
 
 signed main() {
-    cin >> s;
-    int n = s.size();
-    int w = count(all(s), 'o') + 15-n;
-    cout << (w>=8 ? "YES" : "NO") << endl;
+    cin >> n;
+    cout << 180 + (n-3)*180 << endl;
 }
