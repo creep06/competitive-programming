@@ -67,21 +67,23 @@ bool ool(int x,int y,int h,int w) {return((x<0)||(h<=x)||(y<0)||(w<=y));}
 bool deq(double a,double b) {return abs(a-b)<eps;}
 
 struct oreno_initializer {
-	oreno_initializer() {
-		cin.tie(0);
-		ios::sync_with_stdio(0);
-	}
+    oreno_initializer() {
+        cin.tie(0);
+        ios::sync_with_stdio(0);
+    }
 } oreno_initializer;
 
 
 
-int n, k, t[100100], sum, x, res;
-pair<int,int> p[100100];
-priority_queue<int> q[100100];
+int n, a[200200], b[200200];
+set<pair<int,int> > s;
 
 signed main() {
-	cin >> n >> k;
-	rep(i,n) cin >> p[i].second >> p[i].first;
-	sort(p, p+n), reverse(p, p+n);
-	rep(i,k) ;
+    cin >> n;
+    rep(i,n) {
+        cin >> a[i] >> b[i];
+        if (a[i]>b[i]) swap(a[i],b[i]);
+        s.insert({a[i], b[i]});
+    }
+    cout << s.size() << endl;
 }
